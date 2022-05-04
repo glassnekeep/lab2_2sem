@@ -8,7 +8,6 @@
 
 #include "Sequence.h"
 #include "DynamicArray.h"
-#include "Exception.h"
 
 using namespace std;
 
@@ -24,7 +23,7 @@ public:
     ArraySequence(const DynamicArray <T> &newArray );
 public:
     int getLength() override;
-    int getCapacity() override;
+    int getCapacity();
     T getFirst() override;
     T getLast() override;
     T get(int index) override;

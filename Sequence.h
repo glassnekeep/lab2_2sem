@@ -10,10 +10,7 @@
 //Темплейт класс какого-то типа T
 using namespace std;
 
-template <class T> class Sequence
-{
-private:
-
+template <class T> class Sequence {
 public:
     // Конструкторы
     Sequence() = default;
@@ -23,16 +20,15 @@ public:
     virtual T get(int index) = 0;	// Возвращает элемент по индексу
     //GetSubsequence возвращает указатель на подпоследовательность используя
     // индексы начала и конца подпоследовательности из  Sequence
-    virtual Sequence<T>* GetSubsequence(int startIndex, int endIndex) = 0;
+    virtual Sequence<T>* getSubsequence(int startIndex, int endIndex) = 0;
     virtual int getLength() = 0;	// Возвращает длину последовательности
-    virtual void set(int index, T data) = 0;	// Меняет значение i-го элемента
     virtual T& operator[](int index) = 0;
 
     // Операции
-    virtual void Append(T item) = 0; // Добавляет элемент в конец списка
-    virtual void Prepend(T item) = 0; // Добавляет элемент в начало списка
-    virtual void InsertAt(T item, int index) = 0; // Вставляет элемент в заданную позицию
-    virtual Sequence <T>* Concat(Sequence <T>* list) = 0; // Сцепляет два списка
+    virtual void append(T item) = 0; // Добавляет элемент в конец списка
+    virtual void prepend(T item) = 0; // Добавляет элемент в начало списка
+    virtual void insertAt(T item, int index) = 0; // Вставляет элемент в заданную позицию
+    virtual Sequence <T>* concat(Sequence <T>* list) = 0; // Сцепляет два списка
 
     //map, reduce, zip, unzip, where
     void map(T mapFunc(T arg)) {
@@ -63,7 +59,7 @@ public:
 
 template <class T>
 std::ostream& operator<<(std::ostream& out, Sequence<T>* seq) {
-    for (int i = 0; i < seq->Get_Length(); i++) { out << seq->Get(i) << " "; }
+    for (int i = 0; i < seq -> getLength(); i++) { out << seq -> get(i) << " "; }
     return out;
 }
 

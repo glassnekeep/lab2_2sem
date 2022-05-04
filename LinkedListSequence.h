@@ -5,13 +5,6 @@
 #ifndef LAB2_2SEM_LINKEDLISTSEQUENCE_H
 #define LAB2_2SEM_LINKEDLISTSEQUENCE_H
 
-
-#include "Sequence.h"
-#include "linkedList.h"
-#include "Sequence.h"
-#include "LinkedList.h"
-
-#pragma once
 #include "Sequence.h"
 #include "LinkedList.h"
 
@@ -22,9 +15,9 @@ private:
 public:
     //Конструкторы
     LinkedListSequence();
-    LinkedListSequence(int count);
+    explicit LinkedListSequence(int count);
     LinkedListSequence(T *items,int count);
-    LinkedListSequence(const LinkedList<T> &previousList );
+    explicit LinkedListSequence(const LinkedList<T> &previousList );
 
     //Операции
     int getLength() override;
@@ -34,7 +27,7 @@ public:
     Sequence<T>* getSubsequence(int fromIndex,int toIndex ) override;
     void insertAt(T item,int index) override;
     void append(T item) override;
-    void prepand(T item) override;
+    void prepend(T item) override;
     T& operator[](int index)override;
     Sequence <T> * concat(Sequence <T> * sequence)override;
 };
@@ -77,9 +70,9 @@ T LinkedListSequence<T>::getLast() {
 template<class T>
 T LinkedListSequence<T>::get(int index) {
     try {
-        T result = list ->get(index);
+        T result = list -> get(index);
     } catch (Exception& exception) {
-        exception.show();
+        throw exception;
     }
 }
 
@@ -109,7 +102,7 @@ void LinkedListSequence<T>::append(T item) {
 }
 
 template<class T>
-void LinkedListSequence<T>::prepand(T item) {
+void LinkedListSequence<T>::prepend(T item) {
     try {
         insertAt(item, 0);
     } catch (Exception& exception) {

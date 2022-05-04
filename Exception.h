@@ -10,15 +10,13 @@
 #include "string"
 using namespace std;
 
-enum Error
-{
+enum Error {
     INDEX_OUT_OF_RANGE=1,
     NULL_POINTER=2,
     NEGATIVE_SIZE = 3,
 };
 
-class Exception:public exception
-{
+class Exception:public exception {
 public:
     string msg;
     Error number;

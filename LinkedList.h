@@ -11,9 +11,11 @@ using namespace std;
 template <class T> class LinkedList {
 private:
     class Node {
+        friend class LinkedList<T>;
     private:
         Node *next;
         T value;
+        Node(): next(NULL){};
     };
     Node *head;
     int length;
