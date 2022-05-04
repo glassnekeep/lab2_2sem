@@ -16,18 +16,16 @@ private:
 
 public:
     // Конструкторы
-    Sequence() {};
-    Sequence(T* items, int count);
-
+    Sequence() = default;
     // Декомпозиция
-    virtual T GetFirst() = 0;	// Возвращает первый элемент
-    virtual T GetLast() = 0;	// Возвращает последний элемент
-    virtual T Get(int index) = 0;	// Возвращает элемент по индексу
+    virtual T getFirst() = 0;	// Возвращает первый элемент
+    virtual T getLast() = 0;	// Возвращает последний элемент
+    virtual T get(int index) = 0;	// Возвращает элемент по индексу
     //GetSubsequence возвращает указатель на подпоследовательность используя
     // индексы начала и конца подпоследовательности из  Sequence
     virtual Sequence<T>* GetSubsequence(int startIndex, int endIndex) = 0;
-    virtual int GetLength() = 0;	// Возвращает длину последовательности
-    virtual void Set(int index, T data) = 0;	// Меняет значение i-го элемента
+    virtual int getLength() = 0;	// Возвращает длину последовательности
+    virtual void set(int index, T data) = 0;	// Меняет значение i-го элемента
     virtual T& operator[](int index) = 0;
 
     // Операции
@@ -35,38 +33,38 @@ public:
     virtual void Prepend(T item) = 0; // Добавляет элемент в начало списка
     virtual void InsertAt(T item, int index) = 0; // Вставляет элемент в заданную позицию
     virtual Sequence <T>* Concat(Sequence <T>* list) = 0; // Сцепляет два списка
+
     //map, reduce, zip, unzip, where
-    void map(T mupFunc(T arg))
-    {
-        for (int i = 0; i < GetLength(); i++)
-        {
-            Set(i, mupFunc(Get(i)));
+    void map(T mapFunc(T arg)) {
+        for (int i = 0; i < getLength(); i++) {
+            Set(i, mapFunc(get(i)));
         }
     }
-    T reduce(T reduceFunc(T& arg1, T& arg2), T startVal)
-    {
+    T reduce(T reduceFunc(T& arg1, T& arg2), T startVal) {
         T buf = startVal;
-        for (int i = 0; i < GetLength(); i++)
-        {
-            buf = reduceFunc(Get(i), buf);
+        for (int i = 0; i < getLength(); i++) {
+            buf = reduceFunc(get(i), buf);
         }
         return buf;
     }
     // TODO: Много тестов SubSequenceSearch
-    bool SubSequenceSearch(Sequence<T>* seq)
-    {
+    bool SubSequenceSearch(Sequence<T>* seq) {
         bool result = false;
-        for (int i = 0; i < GetLength() - seq->GetLength(); i++)
-        {
+        for (int i = 0; i < getLength() - seq -> getLength(); i++) {
             result = true;
-            for (int j = 0; j < seq->GetLength(); j++)
-            {
-                result &= (Get(i + j) == (seq->Get(j)));
+            for (int j = 0; j < seq -> getLength(); j++) {
+                result &= (get(i + j) == (seq -> get(j)));
             };
-            if (result == true)break;
+            if (result)break;
         }
         return result;
     }
 };
+
+template <class T>
+std::ostream& operator<<(std::ostream& out, Sequence<T>* seq) {
+    for (int i = 0; i < seq->Get_Length(); i++) { out << seq->Get(i) << " "; }
+    return out;
+}
 
 #endif //LAB2_2SEM_SEQUENCE_H

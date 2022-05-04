@@ -22,26 +22,22 @@ class Exception:public exception
 public:
     string msg;
     Error number;
-    Exception(int code)
-    {
-        if (code==1) {
+    explicit Exception(int code) {
+        if (code == 1) {
             msg = "List index out of range";
             number = ::INDEX_OUT_OF_RANGE;
         }
-        if (code==2)
-        {
+        if (code == 2) {
             msg = "Pointer in NULL";
             number = ::NULL_POINTER;
         }
-        if (code==3)
-        {
+        if (code == 3) {
             msg = "Size under zero";
             number = ::NEGATIVE_SIZE;
         }
     };
 
-    void show()
-    {
+    void show() const {
         cout<<msg<<endl;
     }
 };

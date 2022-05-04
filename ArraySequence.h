@@ -2,111 +2,196 @@
 // Created by - on 27.04.2022.
 //
 
-#ifndef LAB2_2SEM_ARRAYSEQUENCE_H
-#define LAB2_2SEM_ARRAYSEQUENCE_H
+#ifndef LAB22SEMARRAYSEQUENCEH
+#define LAB22SEMARRAYSEQUENCEH
 
 
 #include "Sequence.h"
 #include "DynamicArray.h"
 #include "Exception.h"
 
-template <class T> class ArraySequence : public Sequence<T>
-{
+using namespace std;
+
+template <class T>class ArraySequence: public Sequence <T> {
 private:
-    DynamicArray<T>* items;
+    DynamicArray<T> * array;
+    int size;
+
 public:
-    // Конструкторы:
-    ArraySequence() {
-        items = new DynamicArray<T>(0);
-    } // Создать пустой список
-    ArraySequence(T* arr, int count) {
-        items = new DynamicArray<T>(0);
-        items->Resize(count);
-        for (int i = 0; i < count; i++)
-        {
-            items->Set(i, arr[i]);
-        }
-    } // Копировать элементы из переданного массива
-    ArraySequence(ArraySequence <T>& list) {
-        items = new DynamicArray<T>(0);
-        items->Resize(list.GetLength());
-        for (int i = 0; i < (list.GetLength()); i++)
-        {
-            items->Set(i, list.Get(i));
-        }
-    }// Создать на основе другого - Копирующий конструктор
+    ArraySequence();
+    ArraySequence(int count);
+    ArraySequence(T* items,int count);
+    ArraySequence(const DynamicArray <T> &newArray );
+public:
+    int getLength() override;
+    int getCapacity() override;
+    T getFirst() override;
+    T getLast() override;
+    T get(int index) override;
+    Sequence<T>* getSubsequence(int fromIndex,int toIndex ) override;
+    void insertAt(T item,int index) override;
+    void append(T item) override;
+    T& operator[](int index)override;
+    void prepend(T item) override;
+    Sequence <T> * concat(Sequence <T> * list)override;
 
-    T& operator[](int index) {
-        if (index>GetLength()-1 || index<0)
-            throw Exception(1);
-        return items[index];
-    }
-    //Операции из Sequence
-    T GetFirst() {
-        return this->Get(0);
-    }
-    T GetLast() {
-        return this->Get(items->GetSize()-1);
-    }
-    T Get(int index) {
-        return items->Get(index);
-    }
-    ArraySequence<T>* GetSubsequence(int startIndex, int endIndex) {
-        auto* buf = new ArraySequence<T>;
-        int dif = endIndex - startIndex+1;
-        buf->Resize(dif);
-        for (int i = 0; i< dif;i++)
-        {
-            buf->Set(i, this->Get(startIndex+i));
-        }
-        return buf;
-    }
-    int GetLength() {
-        return items->GetSize();
-    }
-    void Set(int index, T value) {// Задать элемент по индексу. Может выбросить IndexOutOfRange
-        items->Set(index, value);
-    }
-
-    // Добавляет элемент в конец списка
-    // TODO: Сделать реализацию без resize в Append, Prepend, InsertAt
-    void Append(T item) {
-        items->Resize(items->GetSize() + 1);
-        items->Set(items->GetSize()-1, item);
-    }
-    // Добавляет элемент в начало списка
-
-    // TODO: Подумать над балансировкой массива.
-    void Prepend(T item) {
-        items->ResizeRight(items->GetSize() + 1);
-        items->Set(0, item);
-    }
-    // Вставляет элемент в заданную позицию
-    void InsertAt(T item, int index) {
-        int newLength = this->GetLength() + 1;
-        this->Resize(newLength);
-        T buf;
-        int dif = newLength - index -1 ;
-        for (int i = 0; i < dif; i++) {
-            buf = this->Get(newLength - i - 2);
-            this->Set(newLength - i - 1, buf);
-        }
-        this->Set(index + 1, item);
-    }
-    Sequence <T>* Concat(Sequence <T>* list) {
-        Sequence <T>* buf = NULL;
-        int oldLenght = this->GetLength();
-        this->Resize(this->GetLength() + ((ArraySequence <T>*)list)->GetLength());
-        for (int i = 0 ;i < ((ArraySequence <T>*)list)->GetLength(); i++)
-            this->Set(i + oldLenght,((ArraySequence <T>*)list)->Get(i));
-        return (Sequence <T>*)buf;
-    }
-    void Resize(int newSize) {
-        items->Resize(newSize);
-    }
-    void ResizeRight(int newSize) {
-        items->ResizeRight(newSize);
-    }
 };
+template<typename T>
+ostream & operator << (ostream& out, ArraySequence<T>* a) {
+    try {
+        for (int i = 0; i < a -> getLength(); ++i) {
+            out << a->get(i) << " ";
+        }
+        return out;
+    }
+    catch (Exception& exception) {
+        throw exception;
+    }
+}
 
-#endif //LAB2_2SEM_ARRAYSEQUENCE_H
+template<typename T>
+ostream & operator << (ostream & out, ArraySequence<T> a) {
+    try {
+        for (int i = 0; i < a.getLength(); ++i) {
+            out << a.get(i) << " ";
+        }
+        return out;
+    }
+    catch (Exception& exception) {
+        throw exception;
+    }
+}
+
+template<class T>
+ArraySequence<T>::ArraySequence() {
+    array = new DynamicArray<T> (0);
+    size = 0;
+}
+
+template<class T>
+ArraySequence<T>::ArraySequence(int count) {
+    array = new DynamicArray<T> (count);
+    size = count;
+}
+
+template<class T>
+ArraySequence<T>::ArraySequence(T* items,int count) {
+    array = new DynamicArray<T>(items, count);
+    size = count;
+}
+
+template<class T>
+ArraySequence<T>::ArraySequence(const DynamicArray <T>& newArray ) {
+    array = new DynamicArray <T>(newArray);
+    size = newArray.getSize();
+}
+
+template<class T>
+int ArraySequence<T>::getLength() {
+    return size;
+}
+
+template<class T>
+int ArraySequence<T>::getCapacity() {
+    return array -> getCapacity();
+}
+
+template<class T>
+T ArraySequence<T>::getFirst() {
+    try {
+        return array -> get(0);
+    } catch (Exception& exception) {
+        throw exception;
+    }
+}
+
+template <class T>
+T ArraySequence<T>::getLast() {
+    try {
+        return array->get(size-1);
+    } catch (Exception& exception) {
+        throw exception;
+    }
+}
+
+template <class T>
+T ArraySequence<T>::get(int index) {
+    try {
+        T a = array -> get(index);
+        return a;
+    } catch (Exception& exception) {
+        throw exception;
+    }
+}
+
+template <class T>
+Sequence <T>* ArraySequence<T>::getSubsequence(int fromIndex,int toIndex ) {
+    try {
+        DynamicArray<T> buffer(fromIndex - toIndex + 1);
+        for (int i = fromIndex; i <= toIndex; i++) {
+            buffer[i - fromIndex] = (*array)[i];
+        }
+        Sequence<T>* subSequence = new ArraySequence(buffer);
+        return subSequence;
+    } catch (Exception& exception) {
+        throw exception;
+    }
+}
+
+template <class T>
+void ArraySequence<T>::insertAt(T item,int index) {
+    try {
+        array -> resize(array -> getSize() + 1);
+        size++;
+        T ptr = (*array)[index];
+        T tmp;
+        for (int i = index + 1; i < size; i++) {
+            tmp = (*array)[i];
+            (*array)[i] = ptr;
+            ptr = tmp;
+        }
+        (*array)[index] = item;
+    } catch (Exception& exception) {
+        size--;
+        throw exception;
+    }
+}
+
+template <class T>
+void ArraySequence<T>::append(T item) {
+    insertAt(item, size);
+}
+
+template <class T>
+void ArraySequence<T>::prepend(T item) {
+    insertAt(item, 0);
+}
+
+template <class T>
+T& ArraySequence<T>::operator[](int index) {
+    try {
+        return (*array)[index];
+    } catch(Exception& exception) {
+        throw exception;
+    }
+}
+
+template <class T>
+Sequence <T>* ArraySequence<T>::concat(Sequence<T> * list) {
+    if (list == NULL) {
+        throw Exception(2);
+    }
+    try {
+        auto *result = new ArraySequence<T>;
+        result -> array = array;
+        result -> size = size;
+        for (int i = 0; i < list -> getLength(); i++) {
+            result -> append((*list)[i]);
+        }
+        return result;
+    } catch (Exception& exception) {
+        throw exception;
+    }
+}
+
+#endif //LAB22SEMARRAYSEQUENCEH
