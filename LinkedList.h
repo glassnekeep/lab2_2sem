@@ -6,6 +6,7 @@
 #define LAB2_2SEM_LINKEDLIST_H
 
 #include <iostream>
+#include "Exception.h"
 using namespace std;
 
 template <class T> class LinkedList {
@@ -58,16 +59,16 @@ template<class T>
 LinkedList<T>::LinkedList(T *items, int size) {
     LinkedList<T> linkedList;
     head = NULL;
-    length = size;
+    length = 0;
     for (int i = 0; i < size; i++) {
-        Node *adding = new Node();//()
+        Node *adding = new Node();
         adding -> next = NULL;
-        adding -> val = items[i];
+        adding -> value = items[i];
         if (head == NULL) {
             head = adding;
         } else {
             Node *current;
-            for (current = head; current -> next != NULL; current=current -> next);
+            for (current = head; current -> next != NULL; current = current -> next);
             current -> next = adding;
         }
         length++;
@@ -80,7 +81,7 @@ LinkedList<T>::LinkedList(const LinkedList<T> &previousList) {
     newHead -> value = previousList.head -> value;
     head = newHead;
     length = previousList.getLength();
-    for (int i = 0; i < previousList.getLength(); i++) {
+    for (int i = 1; i < previousList.getLength(); i++) {
         Node *adding = new Node();
         adding -> next = NULL;
         adding -> value = previousList.get(i);

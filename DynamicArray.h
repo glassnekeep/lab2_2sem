@@ -67,9 +67,9 @@ DynamicArray<T>::DynamicArray(const DynamicArray<T>& array) {
 template <class T>
 DynamicArray<T>::DynamicArray(int count) {
     size = count;
-    capacity = size;
-    if (size != 0)
-        value = new T[size];
+    capacity = count;
+    if (count != 0)
+        value = new T[count];
     else
         value = 0;
 }

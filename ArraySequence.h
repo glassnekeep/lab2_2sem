@@ -126,7 +126,7 @@ T ArraySequence<T>::get(int index) {
 template <class T>
 Sequence <T>* ArraySequence<T>::getSubsequence(int fromIndex,int toIndex ) {
     try {
-        DynamicArray<T> buffer(fromIndex - toIndex + 1);
+        DynamicArray<T> buffer(toIndex - fromIndex + 1);
         for (int i = fromIndex; i <= toIndex; i++) {
             buffer[i - fromIndex] = (*array)[i];
         }
