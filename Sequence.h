@@ -8,6 +8,7 @@
 
 //#include "MyComplex.h"
 //Темплейт класс какого-то типа T
+#include <iostream>
 using namespace std;
 
 template <class T> class Sequence {
@@ -59,7 +60,8 @@ public:
 
 template <class T>
 std::ostream& operator<<(std::ostream& out, Sequence<T>* seq) {
-    for (int i = 0; i < seq -> getLength(); i++) { out << seq -> get(i) << " "; }
+    for (int i = 0; i < seq -> getLength(); i++)
+        out << seq -> get(i) << " ";
     return out;
 }
 

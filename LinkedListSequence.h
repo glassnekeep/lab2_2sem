@@ -71,6 +71,7 @@ template<class T>
 T LinkedListSequence<T>::get(int index) {
     try {
         T result = list -> get(index);
+        return result;
     } catch (Exception& exception) {
         throw exception;
     }
@@ -138,11 +139,10 @@ Sequence<T> *LinkedListSequence<T>::concat(Sequence<T> *sequence) {
 }
 
 template<typename T>
-ostream & operator << (ostream& out, LinkedListSequence<T> linkedListSequence)
+ostream & operator << (ostream & out, LinkedListSequence<T> array)
 {
-    for (int i = 0; i < linkedListSequence.getLength(); ++i) {
-        out << linkedListSequence.get(i) << " ";
-    }
+    for (int i = 0; i < array.getLength(); ++i)
+        out << array.get(i) << " ";
     return out;
 }
 

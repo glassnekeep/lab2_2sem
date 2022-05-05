@@ -97,7 +97,7 @@ int LinkedList<T>::getLength() const {
 
 template<class T>
 T LinkedList<T>::get(int index) const {
-    if (index > 0 || index > length) {
+    if (index < 0 || index > length) {
         throw Exception(1);
     }
     Node* current = head;
