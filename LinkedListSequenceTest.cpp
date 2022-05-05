@@ -67,7 +67,7 @@ void listGetSubListTest() {
         assert((*list1)[i + 1] == list2[i]);
     }
 }
-void linkedListTests() {
+void linkedListTest() {
     listFromArrayTest();
     listFromListTest();
     listConcatTest();
@@ -76,5 +76,5 @@ void linkedListTests() {
     listInsertAtTest();
     listDelTest();
     listGetSubListTest();
-    cout<<"LinkedList tests successful";
+    cout<<"LinkedList tests successfully passed";
 }

@@ -5,10 +5,17 @@
 #ifndef LAB2_2SEM_LINKEDLISTTEST_H
 #define LAB2_2SEM_LINKEDLISTTEST_H
 
+#include <iostream>
+#include "cassert"
+#include "LinkedListSequence.h"
 
-class LinkedListTest {
-
-};
-
+void listSequenceFromArrayTest();
+void listSequenceFromListTest();
+void listSequencePrependTest();
+void listSequenceAppendTest();
+void listSequenceInsertAtTest();
+void listSequenceGetSubSeqTest();
+void listSequenceConcatTests();
+void listSequenceTest();
 
 #endif //LAB2_2SEM_LINKEDLISTTEST_H

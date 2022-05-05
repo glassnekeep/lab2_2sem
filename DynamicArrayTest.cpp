@@ -48,5 +48,5 @@ void dynamicArrayTest() {
     dynamicFromDynamicTest();
     dynamicResizeTest();
     dynamicPushbackTest();
-    cout<<"Dynamic_array tests successful";
+    cout<<"DynamicArray tests successfully passed";
 }

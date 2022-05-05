@@ -64,5 +64,5 @@ void arraySequenceTests() {
     arraySequenceInsertAtTest();
     arraySequenceGetSubSeqTest();
     arraySequenceConcatTests();
-    cout << "ArraySequence tests successful";
+    cout << "ArraySequence tests successfully passed";
 }

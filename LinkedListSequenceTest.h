@@ -17,6 +17,6 @@ void listAppendTest();
 void listInsertAtTest();
 void listDelTest();
 void listGetSubListTest();
-void linkedListTests();
+void linkedListTest();
 
 #endif //LAB2_2SEM_LINKEDLISTSEQUENCETEST_H
