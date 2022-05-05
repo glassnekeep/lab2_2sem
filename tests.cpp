@@ -3,9 +3,9 @@
 //
 
 #include "ArraySequenceTest.h"
-#include "LinkedListSequenceTest.h"
-#include "DynamicArrayTest.h"
 #include "LinkedListTest.h"
+#include "DynamicArrayTest.h"
+#include "LinkedListSequenceTest.h"
 #include "Exception.h"
 using namespace std;
 

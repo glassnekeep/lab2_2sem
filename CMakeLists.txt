@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD 20)
 
 #add_executable(lab2_2sem main.cpp DynamicArray.h ArraySequence.h LinkedListSequence.h Sequence.h Exception.h LinkedList.h)
 
-add_executable(lab2_2sem tests.cpp ArraySequenceTest.h DynamicArrayTest.h LinkedListSequenceTest.h LinkedListTest.h ArraySequenceTest.cpp DynamicArrayTest.cpp LinkedListSequenceTest.cpp Exception.h LinkedListTest.cpp)
+add_executable(lab2_2sem tests.cpp ArraySequenceTest.h DynamicArrayTest.h LinkedListTest.h LinkedListSequenceTest.h ArraySequenceTest.cpp DynamicArrayTest.cpp LinkedListTest.cpp Exception.h LinkedListSequenceTest.cpp)

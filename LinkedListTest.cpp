@@ -6,64 +6,75 @@
 
 using namespace std;
 
-void listSequenceFromArrayTest() {
+void listFromArrayTest() {
     int items[5] = {123, 312, 412, 45, 12};
-    auto* seq = new LinkedListSequence(items,5);
+    auto* list1 = new LinkedList(items,5);
     for (int i = 0; i < 5; i++) {
-        assert((*seq)[i] == items[i]);
+        assert((*list1)[i] == items[i]);
     }
 }
-void listSequenceFromListTest() {
+void listFromListTest() {
     int items[5] = {123, 312, 412, 45, 12};
     auto* list1 = new LinkedList<int>(items,5);
-    auto* second = new LinkedListSequence<int>(*list1);
-    for (int i = 0; i < 5; i++) {
+    auto* second = new LinkedList<int>(*list1);
+    for (int i = 0; i < 4; i++) {
         assert((*list1)[i] == (*second)[i]);
     }
 }
-
-void listSequencePrependTest() {
+void listConcatTest() {
     int items[5] = {123, 312, 412, 45, 12};
-    auto *seq = new LinkedListSequence<int>(items,5);
-    seq -> prepend(42);
-    assert(seq -> get(0) == 42);
-}
-void listSequenceAppendTest() {
-    int items[5] = {123, 312, 412, 45, 12};
-    auto *seq = new LinkedListSequence<int>(items,5);
-    seq -> append(42);
-    assert(seq -> get(5) == 42);
-}
-void listSequenceInsertAtTest() {
-    int items[5] = {123, 312, 412, 45, 12};
-    auto *seq = new LinkedListSequence<int>(items,5);
-    seq -> insertAt(52,2);
-    assert(seq -> get(2) == 52);
+    auto* list1 = new LinkedList<int>(items,5);
+    auto* second = new LinkedList<int>();
+    second = second -> concat(*list1);
 }
 
-void listSequenceGetSubSeqTest() {
-    int items[5]={123, 312, 412, 45, 12};
-    auto *list1=new LinkedListSequence<int>(items,5);
-    Sequence <int> *list2=list1 -> getSubsequence(1,3);
-    for (int i=0;i<3;i++) {
-        assert((*list1)[i + 1] == (*list2)[i]);
+void listPrependTest() {
+    int items[5] = {123, 312, 412, 45, 12};
+    auto *list1 = new LinkedList<int>(items,5);
+    list1 -> prepend(42);
+    assert(list1 -> get(0) == 42);
+}
+void listAppendTest() {
+    int items[5] = {123, 312, 412, 45, 12};
+    auto *list1 = new LinkedList<int>(items,5);
+    list1 -> append(42);
+    assert(list1 -> get(5) == 42);
+}
+void listInsertAtTest() {
+    int items[5] = {123, 312, 412, 45, 12};
+    auto *list1 = new LinkedList<int>(items,5);
+    list1 -> insertAt(2,42);
+    assert(list1 -> get(2) == 42);
+}
+
+void listDelTest() {
+    int items[5] = {123, 312, 412, 45, 12};
+    auto *list1 = new LinkedList<int>(items,5);
+    list1 -> remove(2);
+    for (int i = 0; i < 4; i++) {
+        if (i < 2) {
+            assert((*list1).get(i) == items[i]);
+        } else {
+            assert((*list1).get(i) == items[i+1]);
+        }
     }
 }
-void listSequenceConcatTests() {
-    int items[5]={123, 312, 412, 45, 12};
-    auto* list= new LinkedListSequence<int>(items,5);
-    Sequence<int>* second = new LinkedListSequence <int>();
-    second=second -> concat(list);
+void listGetSubListTest() {
+    int items[5] = {123, 312, 412, 45, 12};
+    auto *list1 = new LinkedList<int>(items,5);
+    LinkedList<int> list2 = list1 -> getSubLinkedList(1,3);
+    for (int i = 0; i < 3; i++) {
+        assert((*list1)[i + 1] == list2[i]);
+    }
 }
-void listSequenceTest() {
-    listSequenceFromArrayTest();
-    listSequenceFromListTest();
-    listSequencePrependTest();
-    listSequenceAppendTest();
-    listSequenceInsertAtTest();
-    listSequenceGetSubSeqTest();
-    listSequenceConcatTests();
-    cout<<"LinkedListSequence tests successfully passed";
+void linkedListTest() {
+    listFromArrayTest();
+    listFromListTest();
+    listConcatTest();
+    listPrependTest();
+    listAppendTest();
+    listInsertAtTest();
+    listDelTest();
+    listGetSubListTest();
+    cout<<"LinkedList tests successfully passed";
 }
-
-
