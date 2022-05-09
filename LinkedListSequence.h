@@ -127,7 +127,7 @@ Sequence<T> *LinkedListSequence<T>::concat(Sequence<T> *sequence) {
     } else {
         try {
             auto *resultList = new LinkedListSequence<T>;
-            *(resultList->list) = *(list);
+            *(resultList -> list) = *(list);
             for (int i = 0; i < sequence->getLength(); i++) {
                 resultList->append(sequence->get(i));
             }

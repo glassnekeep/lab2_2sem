@@ -19,11 +19,9 @@ public:
     DynamicArray(T* items,int length);
     DynamicArray(int count);
     DynamicArray(const DynamicArray<T>& array);
-public:
     int getSize() const ;
     int getCapacity() const;
     T get(int index);
-
     void set(int index, T data);
     void resize(int newSize);
     void push(T data);

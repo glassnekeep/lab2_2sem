@@ -130,7 +130,6 @@ template<class T>
 LinkedList<T> LinkedList<T>::getSubLinkedList(int fromIndex, int toIndex) {
     if (fromIndex < 0 || toIndex > length || toIndex < fromIndex) {
         throw Exception(1);
-        //show Exception(1);
     }
     try {
         LinkedList sublist = LinkedList();
@@ -200,7 +199,7 @@ void LinkedList<T>::insertAt(int index, T data) {
 
 template<class T>
 LinkedList<T> *LinkedList<T>::concat(LinkedList<T> previous) {
-    LinkedList* result = new LinkedList();
+    auto* result = new LinkedList();
     *result = *this;
     for (int i = 0; i < previous.getLength(); i++) {
         result -> append(previous[i]);

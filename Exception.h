@@ -36,7 +36,7 @@ public:
     };
 
     void show() const {
-        cout<<msg<<endl;
+        cout << msg << endl;
     }
 };
 
